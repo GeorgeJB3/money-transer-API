@@ -5,7 +5,6 @@ echo "Hello! Welcome to Georges money transfer API"
 JAR_FILE=target/money-transfer-0.0.1-SNAPSHOT.jar
 PORT=8080
 WAIT_TIME=10
-#APP_PID=ps aux | grep your-application.jar
 
 sleep 1
 
