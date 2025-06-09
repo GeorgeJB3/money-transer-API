@@ -11,7 +11,7 @@ Inside the test folder there are tests for all controller methods. Making sure t
 the application is run on local port 8080 and uses maven dependencies.
 
 
-### **How to run the application**
+## **How to run the application**
 
 #### Pre requisites
 
@@ -20,7 +20,7 @@ Git
 Java 17 JDK
 Maven
 
-Clone the repository:
+Clone the repository: <br />
 `git clone git@github.com:GeorgeJB3/money-transer-API.git`
 
 Open the project in your preferred IDE. I would recommend IntelliJ IDEA.
