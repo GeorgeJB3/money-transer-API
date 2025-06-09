@@ -15,10 +15,10 @@ the application is run on local port 8080 and uses maven dependencies.
 
 #### Pre requisites
 
-Docker
-Git
-Java 17 JDK
-Maven
+Docker <br />
+Git <br />
+Java 17 JDK <br />
+Maven <br />
 
 Clone the repository: <br />
 `git clone git@github.com:GeorgeJB3/money-transer-API.git`
