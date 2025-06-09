@@ -2,7 +2,7 @@
 
 ## API Description
 
-This is a money transfer API developed in Java and uses a PostgreSQL databse to store accounts.
+This is a money transfer API developed in Java uses a PostgreSQL database to store accounts and uses Docker.
 There is an Account class with fields accountID, name and balance.  This is used to create instances for each account holder.
 Inside Transfer controller there is a method to show all accounts in the database, add and delete accounts 
 and then one to transfer money between accounts.
@@ -10,27 +10,54 @@ and then one to transfer money between accounts.
 Inside the test folder there are tests for all controller methods. Making sure they work as intended.
 the application is run on local port 8080 and uses maven dependencies.
 
-
-
-
 ### **How to run the application**
 
+#### Pre requisites
+
+Docker
+Git
+Java 17 JDK
+Maven
+
 Clone the repository:
-git clone git@github.com:GeorgeJB3/money-transer-API.git
+`git clone git@github.com:GeorgeJB3/money-transer-API.git`
 
-Open the project in your preferred IDE. I would recommend IntelliJ.
+Open the project in your preferred IDE. I would recommend IntelliJ IDEA.
 
-Ensure you have PostgreSQL installed then create a database:
+Run the following commands in your terminal:
 
-createdb moneytransferdb
+Build project
+`mvn clean package`
 
-_AccountRepository has all CRUD operations and will create the table for you._
+Build the docker image for the application
+`docker build -t moneytransfer-image .`
 
-RUN: mvn clean package
-_This builds the jar file_
+Run PostgreSQL container (Ensure port 5432 is available)
+`docker run -d --name postgres-docker -e POSTGRES_PASSWORD=password -e POSTGRES_DB=moneytransferdb_docker -p 5432:5432 postgres`
 
-RUN: bash run_api.sh
-_This triggers the application_
+Run the money-tranfer application container
+`docker run -d -t --name moneytransfer-app --link postgres-docker:postgresql -p 8080:8080 moneytransfer-image`
+
+Run the bash script to execute the application
+`bash run_api.sh`
+
+Once finished stop the containers
+
+PostgreSQL container
+`docker stop postgres-docker`
+
+Money-tranfer application container
+`docker stop moneytransfer-app`
+
+If you want to delete the contaoners, Run:
+`docker rm moneytransfer-app postgres-docker`
+
+When running the application again, providing you haven't removed the containers. 
+Run the following to start the containers:
+`docker start postgres-docker` & `docker start moneytransfer-app`
+
+Otherwise, follow the above steps to run the containers.
+
 
 #### Decisions I made
 
@@ -55,20 +82,16 @@ to bug fix along the way.
 Basic RESTful endpoints (GET, POST, DELETE) - 
 Using these 3 endpoints allowed me to meet the project requirements while allowing room for expansion in the future.
 
-Running the app via a bash script instead of Docker container - 
-I focused on running through a bash script to keep things as simple as possible. This is the first API I have 
-built using Java and haven't got much experience creating docker containers. This is a great opportunity to 
-get the experience with docker and something I will be adding in next.
+Testing the controller methods - 
+I have done UT testing to make sure the controller methods work as intended in isolation.
+I tested each methods in various cases such as transferring invalid amounts and ensuring there are not any duplicate accounts.
+
 
 #### What I didn't focus on
 
 Authentication - 
 As this is a basic API being ran locally I didn't need to add authentication. When I further expand the application
 I will need to consider the security of the app.
-
-Docker - 
-Implementing Docker is currently a work in progress. I faced many issues, some due to the controller and test controller using
-the same properties. This is something I am working on to containerise the application.
 
 Stricter error handling - 
 I have kept the error handling fairly minimal just to get the API running and keeping it basic.

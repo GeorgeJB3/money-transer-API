@@ -2,9 +2,11 @@
 
 echo "Hello! Welcome to Georges money transfer API"
 
+#Leaving these variables in incase we need to run without docker
 JAR_FILE=target/money-transfer-0.0.1-SNAPSHOT.jar
-PORT=8080
 WAIT_TIME=10
+
+PORT=8080
 
 sleep 1
 
@@ -12,16 +14,18 @@ echo -e "\n"
 
 echo "Starting the application..."
 
-sleep 1
+sleep 2
 
-java -Xms256m -Xmx1024m -jar $JAR_FILE >/dev/null 2>&1 &
+# Left these commands in incase we need to run without docker
 
+#java -Xms256m -Xmx1024m -jar $JAR_FILE >/dev/null 2>&1 &
 
-echo -e "\n"
-
-echo "Please wait $WAIT_TIME seconds for the application to start"
-
-sleep $WAIT_TIME
+#
+#echo -e "\n"
+#
+#echo "Please wait $WAIT_TIME seconds for the application to start"
+#
+#sleep $WAIT_TIME
 
 echo -e "\n"
 
